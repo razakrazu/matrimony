@@ -41,8 +41,6 @@ dependencies:
   cool_nav: ^0.1.1
   circular_bottom_navigation: ^2.4.0
   curved_navigation_bar: ^1.0.6
-  curved_labeled_navigation_bar: ^2.0.6
-  language_picker: ^0.4.5
   dropdown_button2: ^3.0.0
   country_state_city: ^0.1.6
   calendar_date_picker2: ^2.0.1

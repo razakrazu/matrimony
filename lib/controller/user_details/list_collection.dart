@@ -1,0 +1,329 @@
+
+
+class ListCollection    {
+
+
+
+
+List<String> profileList = [
+    "Select your Profile",
+    "Myself",
+    "Son",
+    "Daughter",
+    "Brother",
+    "Sister",
+  ];
+  List<String> maritalStatusList = [
+    "Select your Marital Status",
+    "Never Married",
+    "Divorced",
+    "Widowed",
+    "Separated",
+    "Awaiting Divorce",
+  ];
+  List<String> ageList = [
+    "Select your Age",
+    "18",
+    "19",
+    "20",
+    "21",
+    "22",
+    "23",
+    "24",
+    "25",
+    "26",
+    "27",
+    "28",
+    "29",
+    "30",
+    "31",
+    "32",
+    "33",
+    "34",
+    "35",
+    "36",
+    "37",
+    "38",
+    "39",
+    "40",
+    "41",
+    "42",
+    "43",
+    "44",
+    "45",
+    "46",
+    "47",
+    "48",
+    "49",
+    "50",
+  ];
+
+  List<String> heightList = [
+    "Select your Height",
+    "4 ft 6 in",
+    "4 ft 7 in",
+    "4 ft 8 in",
+    "4 ft 9 in",
+    "4 ft 10 in",
+    "4 ft 11 in",
+    "5 ft 0 in",
+    "5 ft 1 in",
+    "5 ft 2 in",
+    "5 ft 3 in",
+    "5 ft 4 in",
+    "5 ft 5 in",
+    "5 ft 6 in",
+    "5 ft 7 in",
+    "5 ft 8 in",
+    "5 ft 9 in",
+    "5 ft 10 in",
+    "5 ft 11 in",
+    "6 ft 0 in",
+    "6 ft 1 in",
+    "6 ft 2 in",
+    "6 ft 3 in",
+    "6 ft 4 in",
+  ];
+
+  List<String> weightList = [
+    "Select your Weight",
+    "40 kg",
+    "42 kg",
+    "44 kg",
+    "46 kg",
+    "48 kg",
+    "50 kg",
+    "52 kg",
+    "54 kg",
+    "56 kg",
+    "58 kg",
+    "60 kg",
+    "62 kg",
+    "64 kg",
+    "66 kg",
+    "68 kg",
+    "70 kg",
+    "72 kg",
+    "74 kg",
+    "76 kg",
+    "78 kg",
+    "80 kg",
+    "82 kg",
+    "84 kg",
+    "86 kg",
+    "88 kg",
+    "90 kg",
+    "92 kg",
+    "94 kg",
+    "96 kg",
+    "98 kg",
+    "100 kg",
+    "105 kg",
+    "110 kg",
+    "115 kg",
+    "120 kg",
+  ];
+  List<String> birthStarList = [
+    "Select your Birth Star",
+    "Ashwini",
+    "Bharani",
+    "Krittika",
+    "Rohini",
+    "Mrigashira",
+    "Ardra",
+    "Punarvasu",
+    "Pushya",
+    "Ashlesha",
+    "Magha",
+    "Purva Phalguni",
+    "Uttara Phalguni",
+    "Hasta",
+    "Chitra",
+    "Swati",
+    "Vishakha",
+    "Anuradha",
+    "Jyeshtha",
+    "Mula",
+    "Purva Ashadha",
+    "Uttara Ashadha",
+    "Shravana",
+    "Dhanishta",
+    "Shatabhisha",
+    "Purva Bhadrapada",
+    "Uttara Bhadrapada",
+    "Revati",
+  ];
+
+  List<String> dietPreferenceList = [
+    "Select your Diet Preference",
+    "Vegetarian",
+    "Non-Vegetarian",
+    "Eggetarian",
+    "Vegan",
+    "Jain",
+    "Halal",
+    "Keto",
+    "Paleo",
+    "Pescatarian",
+    "Gluten Free",
+    "No Preference",
+  ];
+
+  List<String> creativeHobbiesList = [
+    "Select your creative Hobbies",
+    "Painting",
+    "Drawing",
+    "Photography",
+    "Writing",
+    "Poetry",
+    "Craft Making",
+    "Singing",
+    "Dancing",
+    "Music",
+    "Cooking",
+    "DIY Projects",
+  ];
+  List<String> funHobbiesList = [
+    "Select your Fun Hobbies",
+    "Watching Movies",
+    "Listening Music",
+    "Gaming",
+    "Traveling",
+    "Reading Books",
+    "Shopping",
+    "Social Media",
+    "Watching Series",
+    "Blogging",
+    "Vlogging",
+  ];
+
+  List<String> fitnessHobbiesList = [
+    "Select your Fitness Hobbies ",
+    "Gym",
+    "Yoga",
+    "Running",
+    "Walking",
+    "Cycling",
+    "Swimming",
+    "Meditation",
+    "Sports",
+    "Football",
+    "Cricket",
+    "Workout",
+  ];
+
+  List<String> otherInterestsList = [
+    "Select your Other Interest ",
+    "Technology",
+    "Business",
+    "Startups",
+    "Investing",
+    "Politics",
+    "Nature",
+    "Animals",
+    "Volunteering",
+    "Teaching",
+    "Learning Languages",
+  ];
+  List<String> fatherOccupationList = [
+    "Select your Father Occupction ",
+    "Business",
+    "Government Job",
+    "Private Job",
+    "Teacher",
+    "Farmer",
+    "Doctor",
+    "Engineer",
+    "Retired",
+    "Self Employed",
+    "Driver",
+    "Other",
+  ];
+  List<String> motherOccupationList = [
+    "Select your Mother Occupction ",
+    "Housewife",
+    "Teacher",
+    "Government Job",
+    "Private Job",
+    "Business",
+    "Nurse",
+    "Doctor",
+    "Self Employed",
+    "Retired",
+    "Other",
+  ];
+  List<String> sisterList = [
+    "Do you have sister",
+    "yes one sisters",
+    "yes two sisters",
+    "yes three sisters",
+    "yes four  sisters",
+    "yes five sisters",
+  ];
+
+  List<String> brotherList = [
+    "Do you have brother",
+    "yes one brothers",
+    "yes two brothers",
+    "yes three brothers ",
+    "yes four  brothers ",
+    "yes five brothers",
+  ];
+
+ 
+  Map<String, Map<String, List<String>>> religionCasteData = {
+    "Hindu": {
+      "Brahmin": [
+        "Iyer",
+        "Iyengar",
+        "Namboothiri",
+        "Gaur Brahmin",
+        "Saraswat Brahmin",
+      ],
+      "Kshatriya": ["Rajput", "Maratha", "Reddy", "Kamma"],
+      "Vaishya": ["Agarwal", "Gupta", "Bania", "Mahajan"],
+      "Shudra": ["Yadav", "Kurmi", "Jat", "Lingayat"],
+    },
+
+    "Muslim": {
+      "General": ["Sunni", "Shia"],
+      "Community": [
+        "Sayyid",
+        "Sheikh",
+        "Pathan",
+        "Mughal",
+        "Ansari",
+        "Qureshi",
+        "Mappila",
+      ],
+    },
+
+    "Christian": {
+      "Denomination": [
+        "Roman Catholic",
+        "Latin Catholic",
+        "Syro Malabar",
+        "Syro Malankara",
+        "Pentecostal",
+        "Marthoma",
+        "Jacobite",
+        "Orthodox",
+      ],
+    },
+
+    "Sikh": {
+      "Community": ["Jat", "Khatri", "Ramgarhia", "Mazhabhi"],
+    },
+
+    "Buddhist": {
+      "Tradition": ["Theravada", "Mahayana", "Vajrayana"],
+    },
+
+    "Jain": {
+      "Sect": ["Digambar", "Shwetambar", "Sthanakvasi"],
+    },
+  };
+
+
+
+}

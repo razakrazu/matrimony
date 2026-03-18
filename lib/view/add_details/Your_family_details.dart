@@ -3,6 +3,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:matrimony_app/controller/user_details/list_collection.dart';
 import 'package:matrimony_app/controller/user_details/user_details.dart'
     show UserDetailsController;
 import 'package:matrimony_app/core/colors.dart';
@@ -20,6 +21,8 @@ class AddYourFamilyDeailScreen extends StatelessWidget {
   AddYourFamilyDeailScreen({super.key});
 
   final UserDetailsController controller = Get.put(UserDetailsController());
+  final ListCollection  listcontroller = Get.put(ListCollection());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +57,7 @@ class AddYourFamilyDeailScreen extends StatelessWidget {
               
                   CustomDropdownButton(
                     selectvalue: controller.motherOccupation.value,
-                    items: controller.motherOccupationList,
+                    items: listcontroller.motherOccupationList,
                     hintText: "Fun",
                     onpressed: (String? p1) {
                       controller.motherOccupation.value = p1!;
@@ -68,7 +71,7 @@ class AddYourFamilyDeailScreen extends StatelessWidget {
               
                   CustomDropdownButton(
                     selectvalue: controller.fatherOccupation.value,
-                    items: controller.fatherOccupationList,
+                    items: listcontroller.fatherOccupationList,
                     hintText: "Others interests",
                     onpressed: (String? p1) {
                       controller.fatherOccupation.value = p1!;
@@ -80,19 +83,26 @@ class AddYourFamilyDeailScreen extends StatelessWidget {
               
                   height10,
               
-                  // CustomDropdownButton(
-                  //   selectvalue: controller.sister.value,
-                  //   items: controller.sisterList,
-                  //   hintText: "Select your profile",
-                  //   onpressed: (String? p1) {
-                  //     controller.sister.value = p1!;
-                  //   },
-                  // ),
-                  // height20,
+                    CustomDropdownButton(
+                    selectvalue: controller.sister.value,
+                    items: listcontroller.sisterList,
+                    hintText: "Others interests",
+                    onpressed: (String? p1) {
+                      controller.sister.value = p1!;
+                    },
+                  ),
+                  height20,
                   DropdownTitleWidget(title: 'Brother'),
               
                   height10,
-                                 
+                CustomDropdownButton(
+                    selectvalue: controller.brother.value,
+                    items: listcontroller.brotherList,
+                    hintText: "Others interests",
+                    onpressed: (String? p1) {
+                      controller.brother.value = p1!;
+                    },
+                  ),    
                   height70,
               
                   MainButtonWidget(

@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:matrimony_app/controller/user_details/user_details.dart';
@@ -69,8 +70,13 @@ class AddImageScreen extends StatelessWidget {
                                 child: Stack(
                                   children: [
                                     Icon(Icons.add),
-                                    Image.file(
-                                      imagesController.selectedImages[index],
+                                    Center(
+                                      child: Image.file(
+                                        imagesController.selectedImages[index],
+                                        fit: BoxFit.cover,
+                                        height: 350,
+                                        width: 300,
+                                      ),
                                     ),
                                   ],
                                 ),

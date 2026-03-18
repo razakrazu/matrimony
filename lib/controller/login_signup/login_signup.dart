@@ -19,7 +19,9 @@ class AuthController extends GetxController {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
   TextEditingController passwordresetmail = TextEditingController();
-  final formkey = GlobalKey<FormState>();
+  final loginformkey = GlobalKey<FormState>();
+    final signupformkey = GlobalKey<FormState>();
+
   var loading = false.obs;
   var ishidden = true.obs;
   RxInt index = 0.obs;

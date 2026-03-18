@@ -3,6 +3,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:matrimony_app/controller/user_details/list_collection.dart';
 import 'package:matrimony_app/controller/user_details/user_details.dart';
 import 'package:matrimony_app/core/colors.dart';
 import 'package:matrimony_app/core/sizes.dart';
@@ -16,6 +17,8 @@ import 'package:matrimony_app/widgets/title_widget.dart';
 class HobbiesAndIndrestScreen extends StatelessWidget {
   HobbiesAndIndrestScreen({super.key});
   final UserDetailsController controller = Get.put(UserDetailsController());
+  final ListCollection  listcontroller = Get.put(ListCollection());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +52,7 @@ class HobbiesAndIndrestScreen extends StatelessWidget {
 
                 CustomDropdownButton(
                   selectvalue: controller.creativeHobbies.value,
-                  items: controller.creativeHobbiesList,
+                  items: listcontroller.creativeHobbiesList,
                   hintText: "Fun",
                   onpressed: (String? p1) {
                     controller.creativeHobbies.value = p1!;
@@ -63,7 +66,7 @@ class HobbiesAndIndrestScreen extends StatelessWidget {
 
                 CustomDropdownButton(
                   selectvalue: controller.funHobbies.value,
-                  items: controller.funHobbiesList,
+                  items: listcontroller.funHobbiesList,
                   hintText: "Others interests",
                   onpressed: (String? p1) {
                     controller.funHobbies.value = p1!;
@@ -77,7 +80,7 @@ class HobbiesAndIndrestScreen extends StatelessWidget {
 
                 CustomDropdownButton(
                   selectvalue: controller.fitnessHobbies.value,
-                  items: controller.fitnessHobbiesList,
+                  items: listcontroller.fitnessHobbiesList,
                   hintText: "Others interests",
                   onpressed: (String? p1) {
                     controller.fitnessHobbies.value = p1!;
@@ -91,7 +94,7 @@ class HobbiesAndIndrestScreen extends StatelessWidget {
 
                 CustomDropdownButton(
                   selectvalue: controller.otherInterests.value,
-                  items: controller.otherInterestsList,
+                  items: listcontroller.otherInterestsList,
                   hintText: "Select your profile",
                   onpressed: (String? p1) {
                     controller.otherInterests.value = p1!;

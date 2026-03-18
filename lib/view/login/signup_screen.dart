@@ -28,6 +28,7 @@ class SignUpScreen extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 120),
             child: Obx(
               () => Form(
+                key: controller.signupformkey,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -83,10 +84,10 @@ class SignUpScreen extends StatelessWidget {
                     height20,
                     AuthCustomButton(
                       ontap: () async {
-                        if (controller.formkey.currentState!.validate()) {
+                        if (controller.signupformkey.currentState!.validate()) {
                           await controller.signUp();
                         }
-                        return;
+                        return ;
                       },
                       text: 'REGISTER',
                       colors: maroon,

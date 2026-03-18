@@ -19,8 +19,6 @@ class UserLocationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-        controller.loadStates(controller.residentCountry.value);
-        controller.loadCities(controller.residentCountry.value,controller.residentState.value);
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -50,29 +48,31 @@ class UserLocationScreen extends StatelessWidget {
                   DropdownTitleWidget(title: 'Resident country'),
                   height10,
 
-                  DropdownButtonFormField<String>(
-                    isExpanded: true,
-                    iconSize: 0.0,
-                    value: controller.residentCountry.value.isEmpty
-                        ? null
-                        : controller.residentCountry.value,
-                    items: controller.countryList
-                        .map(
-                          (country) => DropdownMenuItem<String>(
-                            value: country.isoCode,
-                            child: Text(country.name),
+                  Obx(
+                    () => DropdownButtonFormField<String>(
+                      isExpanded: true,
+                      iconSize: 0.0,
+                      value: controller.residentCountry.value.isEmpty
+                          ? null
+                          : controller.residentCountry.value,
+                      items: controller.countryList
+                          .map(
+                            (country) => DropdownMenuItem<String>(
+                              value: country.isoCode,
+                              child: Text(country.name),
+                            ),
+                          )
+                          .toList(),
+                      onChanged: (value) {
+                        controller.residentCountry.value = value!;
+                        controller.showAllStates(value);
+                      },
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(25),
+                          borderSide: BorderSide(
+                            color: const Color.fromARGB(255, 51, 5, 11),
                           ),
-                        )
-                        .toList(),
-                    onChanged: ( value) {
-                      controller.residentCountry.value = value!;
-                      controller.loadCountries();
-                    },
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(25),
-                        borderSide: BorderSide(
-                          color: const Color.fromARGB(255, 51, 5, 11),
                         ),
                       ),
                     ),
@@ -84,28 +84,32 @@ class UserLocationScreen extends StatelessWidget {
 
                   height10,
 
-                  DropdownButtonFormField(
-                    isExpanded: true,
-                    iconSize: 0.0,
-                    value: controller.residentState.value.isEmpty
-                        ? null
-                        : controller.residentState.value,
-                    items: controller.stateList
-                        .map(
-                          (state) => DropdownMenuItem(
-                            value: state.isoCode,
-                            child: Text(state.name),
-                          ),
-                        )
-                        .toList(),
-                    onChanged: (value) {
-                      controller.residentState.value = value!;
-                      controller.loadStates(value);
-                      // controller.loadStates(controller.residentState.value);
-                    },
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(25),
+                  Obx(
+                    () => DropdownButtonFormField(
+                      isExpanded: true,
+                      iconSize: 0.0,
+                      value: controller.residentState.value.isEmpty
+                          ? null
+                          : controller.residentState.value,
+                      items: controller.stateList
+                          .map(
+                            (state) => DropdownMenuItem(
+                              value: state.isoCode,
+                              child: Text(state.name),
+                            ),
+                          )
+                          .toList(),
+                      onChanged: (value) {
+                        controller.residentState.value = value!;
+                        controller.showAllCities(
+                          controller.residentCountry.value,
+                          value,
+                        );
+                      },
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(25),
+                        ),
                       ),
                     ),
                   ),
@@ -129,10 +133,10 @@ class UserLocationScreen extends StatelessWidget {
                         .toList(),
                     onChanged: (value) {
                       controller.residentCity.value = value!;
-                      controller.loadCities(
-                        controller.residentCountry.value,
-                        value,
-                      );
+                      // controller.loadCities(
+                      //   controller.residentCountry.value,
+                      //   value,
+                      // );
                     },
                     decoration: InputDecoration(
                       border: OutlineInputBorder(

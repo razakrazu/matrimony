@@ -3,6 +3,7 @@ import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/state_manager.dart';
 import 'package:intl/intl.dart';
+import 'package:matrimony_app/controller/user_details/list_collection.dart';
 import 'package:matrimony_app/controller/user_details/user_details.dart';
 import 'package:matrimony_app/core/colors.dart';
 import 'package:matrimony_app/core/sizes.dart';
@@ -17,7 +18,7 @@ import 'package:matrimony_app/widgets/title_widget.dart';
 class BasicInformationScreen extends StatelessWidget {
   BasicInformationScreen({super.key});
   final UserDetailsController controller = Get.put(UserDetailsController());
-
+final ListCollection  listcontroller = Get.put(ListCollection());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,7 +82,7 @@ class BasicInformationScreen extends StatelessWidget {
 
                   CustomDropdownButton(
                     selectvalue: controller.age.value,
-                    items: controller.ageList,
+                    items: listcontroller.ageList,
                     hintText: "Select your profile",
                     onpressed: (String? p1) {
                       controller.age.value = p1!;
@@ -92,13 +93,15 @@ class BasicInformationScreen extends StatelessWidget {
 
                   height10,
 
-                  CustomDropdownButton(
-                    selectvalue: controller.religion.value,
-                    items: controller.religionList,
-                    hintText: "Select Religion",
-                    onpressed: (String? value) {
-                      controller.selectReligion(value!);
-                    },
+                  Obx(
+                    ()=> CustomDropdownButton(
+                      selectvalue: controller.religion.value,
+                      items: controller.religionList,
+                      hintText: "Select Religion",
+                      onpressed: (String? value) {
+                        controller.selectReligion(value!);
+                      },
+                    ),
                   ),
 
                   height10,
@@ -132,7 +135,7 @@ class BasicInformationScreen extends StatelessWidget {
 
                   CustomDropdownButton(
                     selectvalue: controller.height.value,
-                    items: controller.heightList,
+                    items: listcontroller.heightList,
                     hintText: "Select your height",
                     onpressed: (String? p1) {
                       controller.height.value = p1!;
@@ -145,7 +148,7 @@ class BasicInformationScreen extends StatelessWidget {
 
                   CustomDropdownButton(
                     selectvalue: controller.weight.value,
-                    items: controller.weightList,
+                    items: listcontroller.weightList,
                     hintText: "Select your weight",
                     onpressed: (String? p1) {
                       controller.weight.value = p1!;
@@ -158,7 +161,7 @@ class BasicInformationScreen extends StatelessWidget {
 
                   CustomDropdownButton(
                     selectvalue: controller.birthStar.value,
-                    items: controller.birthStarList,
+                    items: listcontroller.birthStarList,
                     hintText: "Select your profile",
                     onpressed: (String? p1) {
                       controller.birthStar.value = p1!;
@@ -200,7 +203,7 @@ class BasicInformationScreen extends StatelessWidget {
 
                   CustomDropdownButton(
                     selectvalue: controller.dietPreference.value,
-                    items: controller.dietPreferenceList,
+                    items: listcontroller.dietPreferenceList,
                     hintText: "Select your profile",
                     onpressed: (String? p1) {
                       controller.dietPreference.value = p1!;

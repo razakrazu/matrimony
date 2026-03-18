@@ -4,7 +4,7 @@ class UserDetailsModel{
 
   String? id;
   
-  String? profileFor;
+  String? selectedProfile;
   String? gender;
   String? motherTongue;
 
@@ -45,7 +45,7 @@ class UserDetailsModel{
 
   UserDetailsModel({
     this.id,
-    this.profileFor,
+    this.selectedProfile,
     this.gender,
     this.motherTongue,
     this.residentCountry,
@@ -83,7 +83,7 @@ class UserDetailsModel{
 
   Map<String, dynamic> toMap() {
     return {
-      'profileFor': profileFor,
+      'profileFor': selectedProfile,
       'gender': gender,
       'motherTongue': motherTongue,
       'residentCountry': residentCountry,
@@ -121,7 +121,7 @@ class UserDetailsModel{
 factory UserDetailsModel.fromMap(DocumentSnapshot map) {
     return UserDetailsModel(
       id: map['id'],
-      profileFor: map['profileFor'],
+      selectedProfile: map['profileFor'],
       gender: map['gender'],
       motherTongue: map['motherTongue'],
       residentCountry: map['residentCountry'],

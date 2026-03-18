@@ -24,7 +24,7 @@ class CustomDropdownButton extends StatelessWidget {
       //   borderRadius: BorderRadius.circular(30),
       //   border: Border.all(color: const Color(0xff8B1E2D)),
       // ),
-      child: DropdownButtonFormField<String>(
+      child: DropdownButtonFormField(
         value: selectvalue,
         hint: Text(hintText),
         isExpanded: true,

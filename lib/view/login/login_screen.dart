@@ -28,7 +28,7 @@ class LoginScreen extends StatelessWidget {
 
             child: Obx(
               () => Form(
-                key: controller.formkey,
+                key: controller.loginformkey,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -87,7 +87,7 @@ class LoginScreen extends StatelessWidget {
 
                     AuthCustomButton(
                       ontap: () {
-                        if (controller.formkey.currentState!.validate()) {
+                        if (controller.loginformkey.currentState!.validate()) {
                           controller.logIn();
                         }
                         return;
