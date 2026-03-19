@@ -8,21 +8,20 @@ class MainCustomTextFormField extends StatelessWidget {
   final TextEditingController controller;
   final Callback? ontap;
 
-  const  MainCustomTextFormField({
+  const MainCustomTextFormField({
     super.key,
     required this.hintText,
     this.suffixIcon,
-   required this.controller,
+    required this.controller,
     this.ontap,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-    
       controller: controller,
       onTap: ontap,
-   
+
       decoration: InputDecoration(
         hintText: hintText,
 
@@ -35,18 +34,7 @@ class MainCustomTextFormField extends StatelessWidget {
 
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(40),
-          borderSide: const BorderSide(
-            color: maroon,
-            width: 1.5,
-          ),
-        ),
-
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(40),
-          borderSide: const BorderSide(
-            color: maroon,
-            width: 2,
-          ),
+          borderSide: const BorderSide(color: maroon, width: 1.5),
         ),
       ),
     );

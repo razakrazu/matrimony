@@ -51,7 +51,6 @@ class UserLocationScreen extends StatelessWidget {
                   Obx(
                     () => DropdownButtonFormField<String>(
                       isExpanded: true,
-                      iconSize: 0.0,
                       value: controller.residentCountry.value.isEmpty
                           ? null
                           : controller.residentCountry.value,

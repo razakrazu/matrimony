@@ -3,21 +3,19 @@ import 'package:flutter/material.dart';
 class UserDetailsScreen extends StatelessWidget {
   const UserDetailsScreen({super.key});
 
-Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        leading: const Icon(Icons.arrow_back,color: Colors.black),
-        actions: const [
-          Icon(Icons.more_vert,color: Colors.black)
-        ],
+        leading: const Icon(Icons.arrow_back, color: Colors.black),
+        actions: const [Icon(Icons.more_vert, color: Colors.black) ],
       ),
       body: SingleChildScrollView(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-
             Container(
               height: 250,
               width: double.infinity,
@@ -33,10 +31,7 @@ Widget build(BuildContext context) {
 
             const Text(
               "Rahul N., 27",
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
 
             const SizedBox(height: 20),
@@ -87,9 +82,10 @@ Widget build(BuildContext context) {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(title,
-                style:
-                    const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+            Text(
+              title,
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
             const SizedBox(height: 10),
             Text(content),
           ],
@@ -110,8 +106,10 @@ Widget build(BuildContext context) {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: const [
-            Text("Contact Details",
-                style: TextStyle(fontWeight: FontWeight.bold)),
+            Text(
+              "Contact Details",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
             SizedBox(height: 10),
             Row(
               children: [
@@ -147,8 +145,10 @@ Widget build(BuildContext context) {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: const [
-            Text("Basic Details",
-                style: TextStyle(fontWeight: FontWeight.bold)),
+            Text(
+              "Basic Details",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
             SizedBox(height: 10),
             Row(
               children: [
@@ -176,4 +176,6 @@ Widget build(BuildContext context) {
           ],
         ),
       ),
-    );}}
+    );
+  }
+}

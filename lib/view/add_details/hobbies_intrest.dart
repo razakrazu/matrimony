@@ -17,7 +17,7 @@ import 'package:matrimony_app/widgets/title_widget.dart';
 class HobbiesAndIndrestScreen extends StatelessWidget {
   HobbiesAndIndrestScreen({super.key});
   final UserDetailsController controller = Get.put(UserDetailsController());
-  final ListCollection  listcontroller = Get.put(ListCollection());
+  final ListCollection listcontroller = Get.put(ListCollection());
 
   @override
   Widget build(BuildContext context) {

@@ -5,6 +5,7 @@ import 'package:matrimony_app/controller/user_details/user_details.dart';
 import 'package:matrimony_app/controller/user_details/image_pickup.dart';
 import 'package:matrimony_app/core/colors.dart';
 import 'package:matrimony_app/core/sizes.dart';
+import 'package:matrimony_app/model/user_details/user_details.dart';
 import 'package:matrimony_app/view/add_details/congratulations_screen.dart';
 import 'package:matrimony_app/view/login/widgets/image_picker_bottam_sheet.dart';
 import 'package:matrimony_app/widgets/dropdown_button_title.dart';
@@ -120,6 +121,9 @@ class AddImageScreen extends StatelessWidget {
                   text: 'Submit',
                   color: maroon,
                   onTap: () {
+                    UserDetailsModel userDatas= controller.buildUserModel();
+                    
+                    controller.addUserDerails(  userDatas);
                     Get.to(CongratulationScreen());
                   },
                 ),

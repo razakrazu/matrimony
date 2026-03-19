@@ -1,4 +1,3 @@
-
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:country_state_city/models/city.dart';
@@ -19,8 +18,8 @@ class UserDetailsController extends GetxController {
     showAllCountries();
     super.onInit();
   }
-  ListCollection controller =ListCollection();
 
+  ListCollection controller = ListCollection();
 
   FirebaseFirestore dataBase = FirebaseFirestore.instance;
 
@@ -33,7 +32,7 @@ class UserDetailsController extends GetxController {
   TextEditingController income = TextEditingController();
 
   RxString profile = "Select your Profile".obs;
-  RxInt gender = 0.obs;  
+  RxInt gender = 0.obs;
   RxString residentCountry = ''.obs;
   RxString residentState = ''.obs;
   RxString residentCity = ''.obs;
@@ -57,7 +56,7 @@ class UserDetailsController extends GetxController {
   RxString fatherOccupation = "Select your Father Occupction ".obs;
   RxString sister = 'Do you have sister'.obs;
   RxString brother = 'Do you have brother'.obs;
-  RxList<dynamic>listphotos = [].obs;
+  RxList<dynamic> listphotos = [].obs;
 
   Future<void> pickUpDates() async {
     var results = await showCalendarDatePicker2Dialog(
@@ -78,7 +77,6 @@ class UserDetailsController extends GetxController {
 
   Future<void> showAllCountries() async {
     countryList.value = await getAllCountries();
- 
   }
 
   Future<void> showAllStates(String countryCode) async {
@@ -90,8 +88,6 @@ class UserDetailsController extends GetxController {
     cityList.value = await getStateCities(countryCode, stateCode);
     update();
   }
-
-
 
   // void selectReligion(String value) {
   //   religion.value = value;
@@ -125,7 +121,7 @@ class UserDetailsController extends GetxController {
     subCaste.value = '';
 
     subCasteList.assignAll(
-  controller. religionCasteData[religion.value]![value]!
+      controller.religionCasteData[religion.value]![value]!,
     );
   }
 
@@ -133,54 +129,57 @@ class UserDetailsController extends GetxController {
     subCaste.value = value;
   }
 
+  Future<void> addUserDerails(UserDetailsModel userModel) async {
+    try {
+      String uid = FirebaseAuth.instance.currentUser!.uid;
 
-  Future<void> addUserFullDerails() async {
-    UserDetailsModel userDetails = UserDetailsModel(
-      selectedProfile: profile.value,
-      gender: gender.toString(),
-      motherTongue: motherTongue.text,
-
-      residentCountry: residentCountry.value,
-      residentState: residentState.value,
-      residentCity: residentCity.value,
-
-      fullName: fullName.text,
-      dateBirth: dateBirth.text,
-      age: age.value,
-      maritalStatus: maritalStatus.value,
-
-      religion: religion.value,
-      caste: caste.value,
-      subCaste: subCaste.value,
-
-      height: height.value,
-      weight: weight.value,
-      birthStar: birthStar.value,
-
-      job: job.text,
-      income: income.text,
-      education: education.text,
-      dietPreference: dietPreference.value,
-
-      creativeHobbies: creativeHobbies.value,
-      funHobbies: funHobbies.value,
-      fitnessHobbies: fitnessHobbies.value,
-      otherInterests: otherInterests.value,
-
-      motherOccupation: motherOccupation.value,
-      fatherOccupation: fatherOccupation.value,
-      brothers: brother.value,
-      sisters: sister.value,
-
-      photos: listphotos,
-      bio: bio.text,
-
-      // identityProof: identityProof.value,
-    );
-
-    String uid = FirebaseAuth.instance.currentUser!.uid;
-    await dataBase.collection('User').doc(uid).set(userDetails.toMap());
+      await dataBase
+          .collection('User')
+          .doc(uid)
+          .collection('profile')
+          .add(userModel.toMap());
+      print('Successfull');
+    } catch (e) {
+      print('Error,$e');
+    }
   }
+
+
+UserDetailsModel buildUserModel() {
+  return UserDetailsModel(
+    selectedProfile: profile.value,
+    gender: gender.toString(),
+    motherTongue: motherTongue.text,
+    residentCountry: residentCountry.value,
+    residentState: residentState.value,
+    residentCity: residentCity.value,
+    fullName: fullName.text,
+    dateBirth: dateBirth.text,
+    age: age.value,
+    maritalStatus: maritalStatus.value,
+    religion: religion.value,
+    caste: caste.value,
+    subCaste: subCaste.value,
+    height: height.value,
+    weight: weight.value,
+    birthStar: birthStar.value,
+    job: job.text,
+    income: income.text,
+    education: education.text,
+    dietPreference: dietPreference.value,
+    creativeHobbies: creativeHobbies.value,
+    funHobbies: funHobbies.value,
+    fitnessHobbies: fitnessHobbies.value,
+    otherInterests: otherInterests.value,
+    motherOccupation: motherOccupation.value,
+    fatherOccupation: fatherOccupation.value,
+    sisters: sister.value,
+    brothers: brother.value,
+    photos: listphotos,
+    bio: bio.text,
+    // identityProof: identityProof.,
+  );
+}
 
   // All Lists
   RxList<String> religionList = <String>[].obs;
@@ -191,8 +190,6 @@ class UserDetailsController extends GetxController {
   RxList<City> cityList = <City>[].obs;
   RxList<DateTime?> selectedDates = <DateTime?>[].obs;
 
-
-  
   // void sisterList(dynamic value ){
   //   selectedProfile.value = value;
   // }

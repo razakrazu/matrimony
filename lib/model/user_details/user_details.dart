@@ -26,7 +26,6 @@ class UserDetailsModel{
   String? income;
   String? education;
   String? dietPreference;
-  String? isDisabled; 
 
   String? creativeHobbies;
   String? funHobbies;
@@ -65,7 +64,6 @@ class UserDetailsModel{
     this.income,
     this.education,
     this.dietPreference,
-    this.isDisabled,
     this.creativeHobbies,
     this.funHobbies,
     this.fitnessHobbies,
@@ -103,7 +101,6 @@ class UserDetailsModel{
       'income':income,
       'education': education,
       'dietPreference': dietPreference,
-      'isDisabled': isDisabled,
       'creativeHobbies': creativeHobbies,
       'funHobbies': funHobbies,
       'fitnessHobbies': fitnessHobbies,
@@ -140,7 +137,6 @@ factory UserDetailsModel.fromMap(DocumentSnapshot map) {
       income: map['income'],
       education: map['education'],
       dietPreference: map['dietPreference'],
-      isDisabled: map['isDisabled'],
       creativeHobbies: map['creativeHobbies'],
       funHobbies: map['funHobbies'],
       fitnessHobbies: map['fitnessHobbies'],

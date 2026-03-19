@@ -17,36 +17,39 @@ class CustomDropdownButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 50,
+      height: 63,
 
-      // padding: const EdgeInsets.symmetric(horizontal: 15),
-      // decoration: BoxDecoration(
-      //   borderRadius: BorderRadius.circular(30),
-      //   border: Border.all(color: const Color(0xff8B1E2D)),
-      // ),
-      child: DropdownButtonFormField(
-        value: selectvalue,
-        hint: Text(hintText),
-        isExpanded: true,
-        // underline: const SizedBox(),
-        icon: const Icon(Icons.keyboard_arrow_down),
-
-        items: items.map((item) => DropdownMenuItem(value: item, child: Text(item)))
-            .toList(),
-          
-
-        onChanged: (value) {
-          if (value != null) {
-            onpressed(value);
-          }
-        },
-        decoration: InputDecoration(
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(25),
-            borderSide: BorderSide(color: maroon,width: 1.5),
-          ),
-        ),
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(30),
+        border: Border.all(color: maroon,width: 1.5),
+      ),
+      child: Center(
+        child: DropdownButtonFormField(
+          value: selectvalue,
+          hint: Text(hintText),
+          isExpanded: true,
+          // underline: const SizedBox(),
+          icon: const Icon(Icons.keyboard_arrow_down),
         
+          items: items.map((item) => DropdownMenuItem(value: item, child: Text(item)))
+              .toList(),
+            
+        
+          onChanged: (value) {
+            if (value != null) {
+              onpressed(value);
+            }
+          },
+         decoration: InputDecoration(
+          border: InputBorder.none,
+          focusedBorder: InputBorder.none,
+          enabledBorder: InputBorder.none,
+           errorBorder: InputBorder.none,
+          
+          ),
+          
+        ),
       ),
     );
   }
