@@ -1,6 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:matrimony_app/controller/user_details/sarvice.dart';
 import 'package:matrimony_app/controller/user_details/user_details.dart';
 import 'package:matrimony_app/controller/user_details/image_pickup.dart';
 import 'package:matrimony_app/core/colors.dart';
@@ -19,34 +19,34 @@ class AddImageScreen extends StatelessWidget {
   final ImagePickUpController imagesController = Get.put(
     ImagePickUpController(),
   );
+  final UserSarvices sarviceCantroller = Get.put(UserSarvices());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: white,
 
       body: Obx(
-    ()=> SingleChildScrollView(
+        () => SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(20),
             child: Column(
               children: [
                 height40,
                 TitleWidget(title: "Upload your best recent photo"),
-        
+
                 const SizedBox(height: 5),
-        
+
                 SubTitleWidget(
                   subtitle: 'Profiles with photos get more responses',
                 ),
                 height30,
-        
+
                 SizedBox(
                   height: 380,
                   child: imagesController.selectedImages.isEmpty
                       ? InkWell(
-                        onTap: () => PickupBottamSheet(context)
-,
-                        child: Container(
+                          onTap: () => PickupBottamSheet(context),
+                          child: Container(
                             width: 300,
                             margin: const EdgeInsets.all(8.0),
                             decoration: BoxDecoration(
@@ -55,46 +55,44 @@ class AddImageScreen extends StatelessWidget {
                             ),
                             child: Center(child: Icon(Icons.add)),
                           ),
-                      )
+                        )
                       : ListView.builder(
                           scrollDirection: Axis.horizontal,
                           itemCount: imagesController.selectedImages.length,
                           itemBuilder: (context, index) {
-                            return 
-                               Container(
-                                width: 300,
-                                margin: const EdgeInsets.all(8.0),
-                                decoration: BoxDecoration(
-                                  color: const Color.fromARGB(255, 255, 207, 207),
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                child: Stack(
-                                  children: [
-                                    Icon(Icons.add),
-                                    Center(
-                                      child: Image.file(
-                                        imagesController.selectedImages[index],
-                                        fit: BoxFit.cover,
-                                        height: 350,
-                                        width: 300,
-                                      ),
+                            return Container(
+                              width: 300,
+                              margin: const EdgeInsets.all(8.0),
+                              decoration: BoxDecoration(
+                                color: const Color.fromARGB(255, 255, 207, 207),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Stack(
+                                children: [
+                                  Icon(Icons.add),
+                                  Center(
+                                    child: Image.file(
+                                      imagesController.selectedImages[index],
+                                      fit: BoxFit.cover,
+                                      height: 350,
+                                      width: 300,
                                     ),
-                                  ],
-                                ),
-                              );
-                            
+                                  ),
+                                ],
+                              ),
+                            );
                           },
                         ),
                 ),
                 height20,
-        
+
                 const Align(
                   alignment: Alignment.centerLeft,
                   child: DropdownTitleWidget(title: 'Bio'),
                 ),
-        
+
                 height10,
-        
+
                 TextField(
                   controller: controller.bio,
                   maxLines: 3,
@@ -108,26 +106,30 @@ class AddImageScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-        
+
                 height10,
-        
+
                 const Align(
                   alignment: Alignment.bottomRight,
                   child: Text("54/500"),
                 ),
                 height40,
-        
+
                 MainButtonWidget(
                   text: 'Submit',
                   color: maroon,
-                  onTap: () {
-                    UserDetailsModel userDatas= controller.buildUserModel();
-                    
-                    controller.addUserDerails(  userDatas);
+                  onTap: () async {
+                    UserDetailsModel userDatas = controller.buildUserModel();
+                    bool success = await sarviceCantroller.addUserDerails(
+                      userDatas,
+                    );
+                    if (success) {
+                      controller.clearAllFields();
+                    }
                     Get.to(CongratulationScreen());
                   },
                 ),
-        
+
                 height20,
               ],
             ),

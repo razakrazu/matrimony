@@ -70,11 +70,11 @@ controller.showAllCountries();
 ToggleButtons(
   borderRadius: BorderRadius.circular(25),
   isSelected: [
-    controller.gender.value == 0,
-    controller.gender.value == 1,
+    controller.selectgrnder.value == 0,
+    controller.selectgrnder.value == 1,
   ],
   onPressed: (index) {
-    controller.gender.value = index;
+    controller.selectgrnder.value = '';
   },
   selectedColor: Colors.white,
   fillColor: maroon,

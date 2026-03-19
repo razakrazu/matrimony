@@ -10,6 +10,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart' hide State;
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/state_manager.dart';
+import 'package:matrimony_app/controller/user_details/image_pickup.dart';
 import 'package:matrimony_app/controller/user_details/list_collection.dart';
 import 'package:matrimony_app/model/user_details/user_details.dart';
 
@@ -20,8 +21,10 @@ class UserDetailsController extends GetxController {
   }
 
   ListCollection controller = ListCollection();
+  ImagePickUpController imagecontroller = ImagePickUpController();
+  FirebaseFirestore dataBase = FirebaseFirestore.instance; 
+   FirebaseAuth auth = FirebaseAuth.instance;
 
-  FirebaseFirestore dataBase = FirebaseFirestore.instance;
 
   TextEditingController bio = TextEditingController();
   TextEditingController motherTongue = TextEditingController();
@@ -30,9 +33,9 @@ class UserDetailsController extends GetxController {
   TextEditingController job = TextEditingController();
   TextEditingController education = TextEditingController();
   TextEditingController income = TextEditingController();
+  RxnString selectgrnder = RxnString();
 
   RxString profile = "Select your Profile".obs;
-  RxInt gender = 0.obs;
   RxString residentCountry = ''.obs;
   RxString residentState = ''.obs;
   RxString residentCity = ''.obs;
@@ -56,7 +59,87 @@ class UserDetailsController extends GetxController {
   RxString fatherOccupation = "Select your Father Occupction ".obs;
   RxString sister = 'Do you have sister'.obs;
   RxString brother = 'Do you have brother'.obs;
-  RxList<dynamic> listphotos = [].obs;
+
+  RxList<String> religionList = <String>[].obs;
+  RxList<String> casteList = <String>[].obs;
+  RxList<String> subCasteList = <String>[].obs;
+  RxList<Country> countryList = <Country>[].obs;
+  RxList<State> stateList = <State>[].obs;
+  RxList<City> cityList = <City>[].obs;
+  RxList<DateTime?> selectedDates = <DateTime?>[].obs;
+
+  UserDetailsModel buildUserModel() {
+    return UserDetailsModel(
+      selectedProfile: profile.value,
+      // gender: gender.toString(),
+      motherTongue: motherTongue.text,
+      residentCountry: residentCountry.value,
+      residentState: residentState.value,
+      residentCity: residentCity.value,
+      fullName: fullName.text,
+      dateBirth: dateBirth.text,
+      age: age.value,
+      maritalStatus: maritalStatus.value,
+      religion: religion.value,
+      caste: caste.value,
+      subCaste: subCaste.value,
+      height: height.value,
+      weight: weight.value,
+      birthStar: birthStar.value,
+      job: job.text,
+      income: income.text,
+      education: education.text,
+      dietPreference: dietPreference.value,
+      creativeHobbies: creativeHobbies.value,
+      funHobbies: funHobbies.value,
+      fitnessHobbies: fitnessHobbies.value,
+      otherInterests: otherInterests.value,
+      motherOccupation: motherOccupation.value,
+      fatherOccupation: fatherOccupation.value,
+      sisters: sister.value,
+      brothers: brother.value,
+      photos: imagecontroller.selectedImages,
+      bio: bio.text,
+    );
+  }
+
+  void clearAllFields() {
+    fullName.clear();
+    dateBirth.clear();
+    job.clear();
+    income.clear();
+    education.clear();
+    bio.clear();
+    motherTongue.clear();
+
+    profile.value = '';
+    // gender.value = false ;
+    residentCountry.value = '';
+    residentState.value = '';
+    residentCity.value = '';
+    maritalStatus.value = '';
+    religion.value = '';
+    caste.value = '';
+    subCaste.value = '';
+    height.value = '';
+    weight.value = '';
+    birthStar.value = '';
+    dietPreference.value = '';
+
+    creativeHobbies.value = '';
+    funHobbies.value = '';
+    fitnessHobbies.value = '';
+    otherInterests.value = '';
+
+    motherOccupation.value = '';
+    fatherOccupation.value = '';
+    sister.value = '';
+    brother.value = '';
+
+    imagecontroller.selectedImages.clear();
+
+    update();
+  }
 
   Future<void> pickUpDates() async {
     var results = await showCalendarDatePicker2Dialog(
@@ -89,22 +172,6 @@ class UserDetailsController extends GetxController {
     update();
   }
 
-  // void selectReligion(String value) {
-  //   religion.value = value;
-
-  //   casteList.value = religionCasteData[value]!.keys.toList();
-
-  //   caste.value = '';
-  //   subCasteList.clear();
-  // }
-  //  void selectCaste(String value) {
-  //   caste.value = value;
-
-  //   subCasteList.value =
-  //       religionCasteData[religion.value]![value]!;
-
-  //   subCaste.value = '';
-  // }
   void selectReligion(String value) {
     religion.value = value;
 
@@ -128,69 +195,4 @@ class UserDetailsController extends GetxController {
   void selectSubCaste(String value) {
     subCaste.value = value;
   }
-
-  Future<void> addUserDerails(UserDetailsModel userModel) async {
-    try {
-      String uid = FirebaseAuth.instance.currentUser!.uid;
-
-      await dataBase
-          .collection('User')
-          .doc(uid)
-          .collection('profile')
-          .add(userModel.toMap());
-      print('Successfull');
-    } catch (e) {
-      print('Error,$e');
-    }
-  }
-
-
-UserDetailsModel buildUserModel() {
-  return UserDetailsModel(
-    selectedProfile: profile.value,
-    gender: gender.toString(),
-    motherTongue: motherTongue.text,
-    residentCountry: residentCountry.value,
-    residentState: residentState.value,
-    residentCity: residentCity.value,
-    fullName: fullName.text,
-    dateBirth: dateBirth.text,
-    age: age.value,
-    maritalStatus: maritalStatus.value,
-    religion: religion.value,
-    caste: caste.value,
-    subCaste: subCaste.value,
-    height: height.value,
-    weight: weight.value,
-    birthStar: birthStar.value,
-    job: job.text,
-    income: income.text,
-    education: education.text,
-    dietPreference: dietPreference.value,
-    creativeHobbies: creativeHobbies.value,
-    funHobbies: funHobbies.value,
-    fitnessHobbies: fitnessHobbies.value,
-    otherInterests: otherInterests.value,
-    motherOccupation: motherOccupation.value,
-    fatherOccupation: fatherOccupation.value,
-    sisters: sister.value,
-    brothers: brother.value,
-    photos: listphotos,
-    bio: bio.text,
-    // identityProof: identityProof.,
-  );
-}
-
-  // All Lists
-  RxList<String> religionList = <String>[].obs;
-  RxList<String> casteList = <String>[].obs;
-  RxList<String> subCasteList = <String>[].obs;
-  RxList<Country> countryList = <Country>[].obs;
-  RxList<State> stateList = <State>[].obs;
-  RxList<City> cityList = <City>[].obs;
-  RxList<DateTime?> selectedDates = <DateTime?>[].obs;
-
-  // void sisterList(dynamic value ){
-  //   selectedProfile.value = value;
-  // }
 }
