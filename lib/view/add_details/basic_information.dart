@@ -18,7 +18,7 @@ import 'package:matrimony_app/widgets/title_widget.dart';
 class BasicInformationScreen extends StatelessWidget {
   BasicInformationScreen({super.key});
   final UserDetailsController controller = Get.put(UserDetailsController());
-final ListCollection  listcontroller = Get.put(ListCollection());
+  final ListCollection listcontroller = Get.put(ListCollection());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -94,7 +94,7 @@ final ListCollection  listcontroller = Get.put(ListCollection());
                   height10,
 
                   Obx(
-                    ()=> CustomDropdownButton(
+                    () => CustomDropdownButton(
                       selectvalue: controller.religion.value,
                       items: controller.religionList,
                       hintText: "Select Religion",

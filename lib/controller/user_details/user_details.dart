@@ -15,16 +15,22 @@ import 'package:matrimony_app/controller/user_details/list_collection.dart';
 import 'package:matrimony_app/model/user_details/user_details.dart';
 
 class UserDetailsController extends GetxController {
-  void oninit() {
-    showAllCountries();
+  // void oninit() {
+  //   showAllCountries();
+  //    loadReligions();
+  //   super.onInit();
+  // }
+  @override
+  void onInit() {
     super.onInit();
+    // showAllCountries();
+    loadReligions();
   }
 
-  ListCollection controller = ListCollection();
+  ListCollection listCollection = ListCollection();
   ImagePickUpController imagecontroller = ImagePickUpController();
-  FirebaseFirestore dataBase = FirebaseFirestore.instance; 
-   FirebaseAuth auth = FirebaseAuth.instance;
-
+  FirebaseFirestore dataBase = FirebaseFirestore.instance;
+  FirebaseAuth auth = FirebaseAuth.instance;
 
   TextEditingController bio = TextEditingController();
   TextEditingController motherTongue = TextEditingController();
@@ -44,7 +50,7 @@ class UserDetailsController extends GetxController {
   RxString age = "Select your Age".obs;
   RxString religion = ''.obs;
   RxString caste = ''.obs;
-  RxString subCaste = ''.obs;
+  RxString subCaste = ' '.obs;
   RxString height = "Select your Height".obs;
   RxString weight = "Select your Weight".obs;
   RxString birthStar = "Select your Birth Star".obs;
@@ -112,29 +118,30 @@ class UserDetailsController extends GetxController {
     bio.clear();
     motherTongue.clear();
 
-    profile.value = '';
+    profile.value = "Select your Profile";
     // gender.value = false ;
     residentCountry.value = '';
     residentState.value = '';
     residentCity.value = '';
-    maritalStatus.value = '';
-    religion.value = '';
-    caste.value = '';
-    subCaste.value = '';
-    height.value = '';
-    weight.value = '';
-    birthStar.value = '';
-    dietPreference.value = '';
+    maritalStatus.value = 'Select your Marital Status';
+    age.value = "Select your Age";
+    religion.value = 'select your religion';
+    caste.value = 'select your caste';
+    subCaste.value = 'select your subcaste';
+    height.value = "Select your Height";
+    weight.value = "Select your Weight";
+    birthStar.value = "";
+    dietPreference.value = "Select your Diet Preference";
 
-    creativeHobbies.value = '';
-    funHobbies.value = '';
-    fitnessHobbies.value = '';
-    otherInterests.value = '';
+    creativeHobbies.value = "Select your creative Hobbies";
+    funHobbies.value = "Select your Fun Hobbies";
+    fitnessHobbies.value = "Select your Fitness Hobbies ";
+    otherInterests.value = "Select your Other Interest ";
 
-    motherOccupation.value = '';
-    fatherOccupation.value = '';
-    sister.value = '';
-    brother.value = '';
+    motherOccupation.value = "Select your Mother Occupction ";
+    fatherOccupation.value = "Select your Father Occupction ";
+    sister.value = 'Do you have sister';
+    brother.value = 'Do you have brother';
 
     imagecontroller.selectedImages.clear();
 
@@ -172,13 +179,18 @@ class UserDetailsController extends GetxController {
     update();
   }
 
+  void loadReligions() {
+    religionList.value = listCollection.religionCasteData.keys.toList();
+  }
+
   void selectReligion(String value) {
     religion.value = value;
 
     caste.value = '';
     subCaste.value = '';
 
-    casteList.assignAll(controller.religionCasteData[value]!.keys.toList());
+    casteList.value =
+        listCollection.religionCasteData[value]?.keys.toList() ?? [];
     subCasteList.clear();
   }
 
@@ -187,9 +199,8 @@ class UserDetailsController extends GetxController {
 
     subCaste.value = '';
 
-    subCasteList.assignAll(
-      controller.religionCasteData[religion.value]![value]!,
-    );
+    subCasteList.value =
+        listCollection.religionCasteData[religion.value]?[value] ?? [];
   }
 
   void selectSubCaste(String value) {

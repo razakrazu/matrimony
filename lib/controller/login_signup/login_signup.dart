@@ -8,27 +8,29 @@ import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:matrimony_app/model/signup_login/signup_login.dart';
 import 'package:matrimony_app/view/bottom_navigation/bottom_navigation.dart';
 import 'package:matrimony_app/view/login/login_screen.dart';
+import 'package:matrimony_app/view/splash/splash.dart';
 
 class AuthController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
   FirebaseFirestore dataBase = FirebaseFirestore.instance;
 
-  TextEditingController logmail = TextEditingController();
-  TextEditingController logpassword = TextEditingController();
-  TextEditingController name = TextEditingController();
-  TextEditingController email = TextEditingController();
-  TextEditingController password = TextEditingController();
-  TextEditingController passwordresetmail = TextEditingController();
+  final  logmail = TextEditingController();
+  final logpassword = TextEditingController();
+  final name = TextEditingController();
+  final email = TextEditingController();
+  final password = TextEditingController();
+  final passwordresetmail = TextEditingController();
   final loginformkey = GlobalKey<FormState>();
-    final signupformkey = GlobalKey<FormState>();
+  final signupformkey = GlobalKey<FormState>();
 
   var loading = false.obs;
   var ishidden = true.obs;
   RxInt index = 0.obs;
 
-  void onInit() async {
+  void onInit()  {
+      checkUser();
     super.onInit();
-    await checkUser();
+
   }
 
   void changeIndex(int selectedIndex) {
@@ -70,7 +72,7 @@ class AuthController extends GetxController {
 
   Future<void> addUserDatas() async {
     SignupAndLoginModel user = SignupAndLoginModel(
-      name: name.text,
+      name: name.text.trim(),
       email: auth.currentUser?.email,
     );
 
@@ -83,22 +85,20 @@ class AuthController extends GetxController {
     email.clear();
     password.clear();
   }
-
   Future<void> signOut() async {
     await auth.signOut();
-    Get.to(LoginScreen());
+    Get.to(SplashScreen());
   }
 
   Future<void> logIn() async {
     try {
       loading.value = true;
       await auth.signInWithEmailAndPassword(
-        email: logmail.text,
-        password: logpassword.text,
+        email: logmail.text.trim(),
+        password: logpassword.text.trim(),
       );
       logmail.clear();
       logpassword.clear();
-
       Get.offAll(() => BottomNavScreen());
 
       loading.value = false;

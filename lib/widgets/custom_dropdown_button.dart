@@ -26,7 +26,7 @@ class CustomDropdownButton extends StatelessWidget {
       ),
       child: Center(
         child: DropdownButtonFormField(
-          value: selectvalue,
+          value: selectvalue.isEmpty? null : selectvalue,
           hint: Text(hintText),
           isExpanded: true,
           // underline: const SizedBox(),
