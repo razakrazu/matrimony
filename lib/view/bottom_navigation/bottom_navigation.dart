@@ -1,4 +1,5 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:matrimony_app/controller/login_signup/login_signup.dart';
@@ -15,7 +16,7 @@ class BottomNavScreen extends StatelessWidget {
   final screens = [
     HomeScreen(),
     UserRegisterScreen(),
-    UserDetailsScreen(),
+    // UserDetailsScreen(userData:,),
     profileScreen(),
     // MyHomePage()
   ];

@@ -70,8 +70,8 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     InkWell(
                       onTap: () {
-                        Get.to(UserDetailsScreen(), arguments: user);
-                        log("${user}");
+                        Get.to(UserDetailsScreen(userData: user,));
+                     
                       },
                       child: Container(
                         decoration: BoxDecoration(

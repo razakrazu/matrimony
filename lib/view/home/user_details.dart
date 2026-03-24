@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/src/extension_navigation.dart';
+import 'package:get/get.dart';
+import 'package:matrimony_app/controller/payiment/payiment_controller.dart';
+
 import 'package:matrimony_app/model/user_details/user_details.dart';
+import 'package:matrimony_app/view/home/payiment_screen.dart';
 
 class UserDetailsScreen extends StatelessWidget {
-   UserDetailsScreen({super.key});
-
-
+  UserDetailsScreen({super.key, required this.userData});
+ final  PaymentController controller1 = Get.put(PaymentController());
   // final UserDetailsModel user  = Get.arguments;
- @override
+  final UserDetailsModel userData;
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF7F7F7),
       body: SingleChildScrollView(
         child: Column(
           children: [
-
             Stack(
               children: [
                 Container(
@@ -23,9 +24,7 @@ class UserDetailsScreen extends StatelessWidget {
                   width: double.infinity,
                   decoration: const BoxDecoration(
                     image: DecorationImage(
-                      image: NetworkImage(
-                        "https://i.pravatar.cc/300",
-                      ),
+                      image: NetworkImage("https://i.pravatar.cc/300"),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -57,16 +56,14 @@ class UserDetailsScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    "Rahul N, 27",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  Text(
+                    userData.fullName ?? '',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 5),
                   Text(
-                    "175cm / 5ft 8in • Hindu • Chartered Accountant",
+                    // "175cm / 5ft 8in • Hindu • Chartered Accountant",
+                    "religion:${userData.religion ?? ""},Job: ${userData.job ?? ""},Height:${userData.height ?? ""},${userData.weight ?? ""},${userData.height ?? ""},",
                     style: TextStyle(color: Colors.grey[700]),
                   ),
                 ],
@@ -138,7 +135,12 @@ class UserDetailsScreen extends StatelessWidget {
                   backgroundColor: const Color(0xFF8B1E2D),
                   minimumSize: const Size(double.infinity, 50),
                 ),
-                onPressed: () {},
+                onPressed: () {
+
+                  // Get.to(PaymentScreen());
+controller1.openCheckout();
+
+                },
                 child: const Text("Continue"),
               ),
             ),
@@ -184,13 +186,8 @@ class UserDetailsScreen extends StatelessWidget {
         children: [
           Icon(icon, size: 18, color: Color(0xFF8B1E2D)),
           const SizedBox(width: 10),
-          Expanded(
-            child: Text(title),
-          ),
-          Text(
-            value,
-            style: const TextStyle(fontWeight: FontWeight.w500),
-          ),
+          Expanded(child: Text(title)),
+          Text(value, style: const TextStyle(fontWeight: FontWeight.w500)),
         ],
       ),
     );
