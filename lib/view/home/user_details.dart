@@ -1,180 +1,197 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
+import 'package:matrimony_app/model/user_details/user_details.dart';
 
 class UserDetailsScreen extends StatelessWidget {
-  const UserDetailsScreen({super.key});
+   UserDetailsScreen({super.key});
 
+
+  // final UserDetailsModel user  = Get.arguments;
+ @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade100,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        leading: const Icon(Icons.arrow_back, color: Colors.black),
-        actions: const [Icon(Icons.more_vert, color: Colors.black) ],
-      ),
+      backgroundColor: const Color(0xFFF7F7F7),
       body: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Container(
-              height: 250,
-              width: double.infinity,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("lib/assets/photos.avif"),
-                  fit: BoxFit.cover,
+
+            Stack(
+              children: [
+                Container(
+                  height: 300,
+                  width: double.infinity,
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: NetworkImage(
+                        "https://i.pravatar.cc/300",
+                      ),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
-              ),
+
+                Positioned(
+                  top: 40,
+                  left: 10,
+                  child: CircleAvatar(
+                    backgroundColor: Colors.white,
+                    child: Icon(Icons.arrow_back),
+                  ),
+                ),
+
+                Positioned(
+                  top: 40,
+                  right: 10,
+                  child: CircleAvatar(
+                    backgroundColor: Colors.white,
+                    child: Icon(Icons.more_vert),
+                  ),
+                ),
+              ],
             ),
 
             const SizedBox(height: 10),
 
-            const Text(
-              "Rahul N., 27",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            _card(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "Rahul N, 27",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 5),
+                  Text(
+                    "175cm / 5ft 8in • Hindu • Chartered Accountant",
+                    style: TextStyle(color: Colors.grey[700]),
+                  ),
+                ],
+              ),
             ),
 
-            const SizedBox(height: 20),
-
-            buildSection(
-              title: "About you",
-              content:
-                  "Calm, caring and friendly. Interested in long term relationship.",
+            _sectionTitle("About you"),
+            _card(
+              child: Text(
+                "Calm, ambitious and family oriented. Enjoys travelling, music and meaningful conversations.",
+              ),
             ),
 
-            buildContactSection(),
+            _sectionTitle("Contact Details"),
+            _card(
+              child: Column(
+                children: [
+                  _tile(Icons.phone, "Mobile", "+91 9999999999"),
+                  _tile(Icons.email, "Email", "demo@gmail.com"),
+                ],
+              ),
+            ),
 
-            buildBasicDetails(),
+            _sectionTitle("Basic Details"),
+            _card(
+              child: Column(
+                children: [
+                  _tile(Icons.cake, "Date of Birth", "01/01/1998"),
+                  _tile(Icons.person, "Gender", "Male"),
+                  _tile(Icons.favorite, "Marital Status", "Never Married"),
+                  _tile(Icons.location_on, "Location", "Kerala, India"),
+                  _tile(Icons.menu_book, "Religion", "Hindu"),
+                  _tile(Icons.height, "Height", "175 cm"),
+                  _tile(Icons.work, "Job", "Accountant"),
+                  _tile(Icons.school, "Education", "CA"),
+                ],
+              ),
+            ),
+
+            _sectionTitle("Hobbies & Interests"),
+            _card(
+              child: Column(
+                children: [
+                  _tile(Icons.brush, "Creative", "Drawing"),
+                  _tile(Icons.sports_soccer, "Fitness", "Gym"),
+                  _tile(Icons.movie, "Fun", "Movies"),
+                ],
+              ),
+            ),
+
+            _sectionTitle("Family Details"),
+            _card(
+              child: Column(
+                children: [
+                  _tile(Icons.person, "Father", "Business"),
+                  _tile(Icons.person, "Mother", "Housewife"),
+                  _tile(Icons.group, "Sisters", "1"),
+                  _tile(Icons.group, "Brothers", "1"),
+                ],
+              ),
+            ),
 
             const SizedBox(height: 20),
 
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.all(16.0),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xff8B1E2D),
-                  minimumSize: const Size(double.infinity, 55),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
+                  backgroundColor: const Color(0xFF8B1E2D),
+                  minimumSize: const Size(double.infinity, 50),
                 ),
                 onPressed: () {},
-                child: const Text("Connect Now"),
+                child: const Text("Continue"),
               ),
             ),
-
-            const SizedBox(height: 20),
           ],
         ),
       ),
     );
   }
 
-  Widget buildSection({required String title, required String content}) {
+  Widget _sectionTitle(String title) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
-      child: Container(
-        padding: const EdgeInsets.all(15),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-          border: Border.all(color: Colors.red.shade200),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              title,
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 10),
-            Text(content),
-          ],
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: Text(
+          title,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Color(0xFF8B1E2D),
+          ),
         ),
       ),
     );
   }
 
-  Widget buildContactSection() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
-      child: Container(
-        padding: const EdgeInsets.all(15),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-          border: Border.all(color: Colors.red.shade200),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
-            Text(
-              "Contact Details",
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 10),
-            Row(
-              children: [
-                Icon(Icons.phone),
-                SizedBox(width: 10),
-                Text("+91 **********"),
-              ],
-            ),
-            SizedBox(height: 10),
-            Row(
-              children: [
-                Icon(Icons.email),
-                SizedBox(width: 10),
-                Text("example@gmail.com"),
-              ],
-            ),
-          ],
-        ),
+  Widget _card({required Widget child}) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: Color(0xFFE0E0E0)),
       ),
+      child: child,
     );
   }
 
-  /// BASIC DETAILS
-  Widget buildBasicDetails() {
+  Widget _tile(IconData icon, String title, String value) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
-      child: Container(
-        padding: const EdgeInsets.all(15),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-          border: Border.all(color: Colors.red.shade200),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
-            Text(
-              "Basic Details",
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 10),
-            Row(
-              children: [
-                Icon(Icons.work),
-                SizedBox(width: 10),
-                Text("Civil Engineer"),
-              ],
-            ),
-            SizedBox(height: 10),
-            Row(
-              children: [
-                Icon(Icons.location_on),
-                SizedBox(width: 10),
-                Text("Kochi, Kerala"),
-              ],
-            ),
-            SizedBox(height: 10),
-            Row(
-              children: [
-                Icon(Icons.favorite),
-                SizedBox(width: 10),
-                Text("Never Married"),
-              ],
-            ),
-          ],
-        ),
+      padding: const EdgeInsets.symmetric(vertical: 6),
+      child: Row(
+        children: [
+          Icon(icon, size: 18, color: Color(0xFF8B1E2D)),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Text(title),
+          ),
+          Text(
+            value,
+            style: const TextStyle(fontWeight: FontWeight.w500),
+          ),
+        ],
       ),
     );
   }

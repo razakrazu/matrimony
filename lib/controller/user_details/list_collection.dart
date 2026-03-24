@@ -1,11 +1,5 @@
-
-
-class ListCollection    {
-
-
-
-
-List<String> profileList = [
+class ListCollection {
+  List<String> profileList = [
     "Select your Profile",
     "Myself",
     "Son",
@@ -270,9 +264,10 @@ List<String> profileList = [
     "yes five brothers",
   ];
 
- 
   Map<String, Map<String, List<String>>> religionCasteData = {
-    'select your religion':{'select your caste':['select your subCaste'],},
+    'select your religion': {
+      'select your caste': ['select your subCaste'],
+    },
     "Hindu": {
       "Brahmin": [
         "Iyer",
@@ -324,7 +319,4 @@ List<String> profileList = [
       "Sect": ["Digambar", "Shwetambar", "Sthanakvasi"],
     },
   };
-
-
-
 }

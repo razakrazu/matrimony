@@ -1,3 +1,6 @@
+
+import 'dart:developer';
+
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:country_state_city/models/city.dart';
@@ -12,25 +15,25 @@ import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/state_manager.dart';
 import 'package:matrimony_app/controller/user_details/image_pickup.dart';
 import 'package:matrimony_app/controller/user_details/list_collection.dart';
+import 'package:matrimony_app/controller/user_details/sarvice.dart';
 import 'package:matrimony_app/model/user_details/user_details.dart';
 
 class UserDetailsController extends GetxController {
-  // void oninit() {
-  //   showAllCountries();
-  //    loadReligions();
-  //   super.onInit();
-  // }
+
   @override
   void onInit() {
     super.onInit();
-    // showAllCountries();
+    fetchProfiles();
+    showAllCountries();
     loadReligions();
+  
   }
 
   ListCollection listCollection = ListCollection();
   ImagePickUpController imagecontroller = ImagePickUpController();
   FirebaseFirestore dataBase = FirebaseFirestore.instance;
   FirebaseAuth auth = FirebaseAuth.instance;
+  UserSarvices sarviceController = UserSarvices();
 
   TextEditingController bio = TextEditingController();
   TextEditingController motherTongue = TextEditingController();
@@ -40,6 +43,9 @@ class UserDetailsController extends GetxController {
   TextEditingController education = TextEditingController();
   TextEditingController income = TextEditingController();
   RxnString selectgrnder = RxnString();
+
+
+  var detailsIsLoading = false.obs;
 
   RxString profile = "Select your Profile".obs;
   RxString residentCountry = ''.obs;
@@ -66,6 +72,8 @@ class UserDetailsController extends GetxController {
   RxString sister = 'Do you have sister'.obs;
   RxString brother = 'Do you have brother'.obs;
 
+
+  var profileList = <UserDetailsModel>[].obs;
   RxList<String> religionList = <String>[].obs;
   RxList<String> casteList = <String>[].obs;
   RxList<String> subCasteList = <String>[].obs;
@@ -205,5 +213,18 @@ class UserDetailsController extends GetxController {
 
   void selectSubCaste(String value) {
     subCaste.value = value;
+  }
+
+  void fetchProfiles() async {
+ try {
+  detailsIsLoading.value = true;
+  var data = await sarviceController.getAllProfiles();
+  profileList.assignAll(data);
+  log('${profileList.length}');
+} catch (e) {
+  print(e);
+} finally {
+  detailsIsLoading.value = false;
+}
   }
 }

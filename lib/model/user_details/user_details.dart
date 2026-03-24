@@ -1,9 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
-class UserDetailsModel{
-
+class UserDetailsModel {
   String? id;
-  
+
   String? selectedProfile;
   String? gender;
   String? motherTongue;
@@ -77,8 +74,6 @@ class UserDetailsModel{
     this.identityProof,
   });
 
-  
-
   Map<String, dynamic> toMap() {
     return {
       'profileFor': selectedProfile,
@@ -89,16 +84,16 @@ class UserDetailsModel{
       'residentCity': residentCity,
       'fullName': fullName,
       'dateBirth': dateBirth,
-      'age':age,
+      'age': age,
       'maritalStatus': maritalStatus,
       'religion': religion,
       'caste': caste,
       'subCaste': subCaste,
       'height': height,
-      'weight':weight,
+      'weight': weight,
       'birthStar': birthStar,
       'job': job,
-      'income':income,
+      'income': income,
       'education': education,
       'dietPreference': dietPreference,
       'creativeHobbies': creativeHobbies,
@@ -115,7 +110,7 @@ class UserDetailsModel{
     };
   }
 
-factory UserDetailsModel.fromMap(DocumentSnapshot map) {
+  factory UserDetailsModel.fromMap(Map<String, dynamic> map) {
     return UserDetailsModel(
       id: map['id'],
       selectedProfile: map['profileFor'],
@@ -131,7 +126,7 @@ factory UserDetailsModel.fromMap(DocumentSnapshot map) {
       caste: map['caste'],
       subCaste: map['subCaste'],
       height: map['height'],
-      weight:map['weight'],
+      weight: map['weight'],
       birthStar: map['birthStar'],
       job: map['job'],
       income: map['income'],
@@ -150,5 +145,4 @@ factory UserDetailsModel.fromMap(DocumentSnapshot map) {
       identityProof: map['identityProof'],
     );
   }
-  
 }

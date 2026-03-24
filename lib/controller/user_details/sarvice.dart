@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:get/state_manager.dart';
 import 'package:matrimony_app/controller/user_details/image_pickup.dart';
 import 'package:matrimony_app/model/user_details/user_details.dart';
 
@@ -7,7 +8,7 @@ class UserSarvices {
   ImagePickUpController imagecontroller = ImagePickUpController();
   FirebaseFirestore dataBase = FirebaseFirestore.instance;
   FirebaseAuth auth = FirebaseAuth.instance;
-
+  var users = <UserDetailsModel>[].obs;
   Future<bool> addUserDerails(UserDetailsModel userModel) async {
     try {
       String uid = auth.currentUser!.uid;
@@ -25,20 +26,50 @@ class UserSarvices {
     }
   }
 
-  Future<List<UserDetailsModel>> getAllUser() async {
-    List<UserDetailsModel> users = [];
+  //   Future<void> getAllUser() async {
+  //     try{
+  // String uid  = auth.currentUser!.uid;
 
-    QuerySnapshot userSnapshort = await dataBase.collection('User').get();
-    for (var user in userSnapshort.docs) {
-      QuerySnapshot profileSnapshot = await dataBase
+  // QuerySnapshot  snapshot = await dataBase
+  //           .collection('User')
+  //           .doc(uid)
+  //           .collection('profile')
+  //           .get();
+
+  //         log('${snapshot.docs}');
+  //         users.clear();
+  //         for(var doc in snapshot.docs){
+  //            UserDetailsModel user = UserDetailsModel.fromMap(doc);
+  //            users.add(user);
+  //         }
+
+  //     }catch(e){
+  // print('error$e ');
+  //     }
+  //   }
+
+  Future<List<UserDetailsModel>> getAllProfiles() async {
+    List<UserDetailsModel> profileList = [];
+
+    try {
+      String uid = auth.currentUser!.uid;
+
+      QuerySnapshot snapshot = await FirebaseFirestore.instance
           .collection('User')
-          .doc(user.id)
+          .doc(uid)
           .collection('profile')
           .get();
-      for (var profile in profileSnapshot.docs) {
-        users.add(UserDetailsModel.fromMap(profile));
+
+      for (var doc in snapshot.docs) {
+        // log('${doc.data()}');
+        profileList.add(
+          UserDetailsModel.fromMap(doc.data() as Map<String, dynamic>),
+        );
       }
+    } catch (e) {
+      print("Error fetching profiles: $e");
     }
-    return users;
+
+    return profileList;
   }
 }
