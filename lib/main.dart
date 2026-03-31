@@ -1,6 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:matrimony_app/controller/login_signup/login_signup.dart';
 import 'package:matrimony_app/view/splash/splash.dart';
 
 Future<void> main() async{
@@ -8,7 +11,7 @@ Future<void> main() async{
   await Firebase.initializeApp();
    runApp(const MyApp());
 }
-
+final AuthController  controller  = Get.put(AuthController());
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -22,7 +25,7 @@ class MyApp extends StatelessWidget {
   
         colorScheme: .fromSeed(seedColor: Colors.deepPurple),
       ),
-      home:   SplashScreen()
+      home:  SplashScreen()
     );
   }
 }

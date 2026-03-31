@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/utils.dart';
+import 'package:matrimony_app/controller/payiment/payiment_controller.dart';
 
 class profileScreen extends StatelessWidget {
-  const profileScreen({super.key});
+   profileScreen({super.key});
 
+
+final controller = Get.put(PaymentController());
  @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -133,7 +138,9 @@ class profileScreen extends StatelessWidget {
                   backgroundColor: const Color(0xFF8B1E2D),
                   minimumSize: const Size(double.infinity, 50),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                   controller.openCheckout();
+                },
                 child: const Text("Continue"),
               ),
             ),

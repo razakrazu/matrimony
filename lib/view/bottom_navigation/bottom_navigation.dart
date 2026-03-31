@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:matrimony_app/view/add_details/add_details.dart';
 import 'package:matrimony_app/view/home/home_screen.dart';
 import 'package:matrimony_app/view/home/user_details.dart';
 import 'package:matrimony_app/view/profile/profile_screen.dart';
+import 'package:matrimony_app/view/settings/settings.dart';
 
 class BottomNavScreen extends StatelessWidget {
   BottomNavScreen({super.key});
@@ -16,9 +18,9 @@ class BottomNavScreen extends StatelessWidget {
   final screens = [
     HomeScreen(),
     UserRegisterScreen(),
-    // UserDetailsScreen(userData:,),
+   
     profileScreen(),
-    // MyHomePage()
+   SettingsScreen(),
   ];
 
   @override

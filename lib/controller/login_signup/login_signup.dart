@@ -8,6 +8,7 @@ import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:matrimony_app/model/signup_login/signup_login.dart';
 import 'package:matrimony_app/view/bottom_navigation/bottom_navigation.dart';
 import 'package:matrimony_app/view/login/login_screen.dart';
+import 'package:matrimony_app/view/login/signup_screen.dart';
 import 'package:matrimony_app/view/splash/splash.dart';
 
 class AuthController extends GetxController {
@@ -42,6 +43,7 @@ class AuthController extends GetxController {
   }
 
   Future<void> checkUser() async {
+
      auth.authStateChanges().listen((User? user) {
       if (user == null) {
         Get.offAll(() => LoginScreen());
@@ -85,6 +87,8 @@ class AuthController extends GetxController {
     email.clear();
     password.clear();
   }
+
+
   Future<void> signOut() async {
     await auth.signOut();
     Get.to(SplashScreen());
@@ -125,7 +129,7 @@ class AuthController extends GetxController {
         'send Successfull',
         backgroundColor: const Color.fromARGB(255, 187, 239, 188),
       );
-      Get.to(LoginScreen());
+      Get.offAll(LoginScreen());
     } catch (e) {
       Get.snackbar('error', '$e');
     }

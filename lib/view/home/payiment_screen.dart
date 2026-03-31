@@ -39,12 +39,10 @@ PaymentController controller = Get.put(PaymentController());
         ),
       ),
 
-      // 🧾 BODY
       body: SingleChildScrollView(
         child: Column(
           children: [
 
-            // 🔹 Preferred Methods
             sectionTitle("Preferred methods"),
             paymentTile(
               icon: Icons.account_balance,
@@ -67,6 +65,7 @@ PaymentController controller = Get.put(PaymentController());
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  
                   Text("UPI", style: TextStyle(fontSize: 16)),
                   SizedBox(height: 10),
 

@@ -1,6 +1,5 @@
 
 import 'dart:developer';
-
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:country_state_city/models/city.dart';
@@ -82,7 +81,9 @@ class UserDetailsController extends GetxController {
   RxList<City> cityList = <City>[].obs;
   RxList<DateTime?> selectedDates = <DateTime?>[].obs;
 
-  UserDetailsModel buildUserModel() {
+ buildUserModel()async {
+    List<String> imageUrls =
+      await imagecontroller.uploadImagesToFirebase(imagecontroller.selectedImages);
     return UserDetailsModel(
       selectedProfile: profile.value,
       // gender: gender.toString(),
@@ -112,9 +113,10 @@ class UserDetailsController extends GetxController {
       fatherOccupation: fatherOccupation.value,
       sisters: sister.value,
       brothers: brother.value,
-      photos: imagecontroller.selectedImages,
+      photos: imageUrls,
       bio: bio.text,
     );
+  
   }
 
   void clearAllFields() {

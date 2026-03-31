@@ -119,7 +119,7 @@ class AddImageScreen extends StatelessWidget {
                   text: 'Submit',
                   color: maroon,
                   onTap: () async {
-                    UserDetailsModel userDatas = controller.buildUserModel();
+                    UserDetailsModel userDatas = await controller.buildUserModel();
                     bool success = await sarviceCantroller.addUserDerails(
                       userDatas,
                     );

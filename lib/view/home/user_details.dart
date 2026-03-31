@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:matrimony_app/controller/payiment/payiment_controller.dart';
+import 'package:matrimony_app/core/colors.dart';
+import 'package:matrimony_app/core/sizes.dart';
 
 import 'package:matrimony_app/model/user_details/user_details.dart';
-import 'package:matrimony_app/view/home/payiment_screen.dart';
+import 'package:matrimony_app/view/home/widgets/card_widgets.dart';
+import 'package:matrimony_app/view/home/widgets/text_widget.dart';
+import 'package:matrimony_app/view/home/widgets/title_widgets.dart';
 
 class UserDetailsScreen extends StatelessWidget {
   UserDetailsScreen({super.key, required this.userData});
- final  PaymentController controller1 = Get.put(PaymentController());
+  final PaymentController controller = Get.put(PaymentController());
   // final UserDetailsModel user  = Get.arguments;
   final UserDetailsModel userData;
   @override
@@ -30,103 +34,122 @@ class UserDetailsScreen extends StatelessWidget {
                   ),
                 ),
 
-                Positioned(
-                  top: 40,
-                  left: 10,
-                  child: CircleAvatar(
-                    backgroundColor: Colors.white,
-                    child: Icon(Icons.arrow_back),
-                  ),
-                ),
+                // Positioned(
+                //   top: 40,
+                //   left: 10,
+                //   child: CircleAvatar(
+                //     backgroundColor: Colors.white,
+                //     child: Icon(Icons.arrow_back),
+                //   ),
+                // ),
 
-                Positioned(
-                  top: 40,
-                  right: 10,
-                  child: CircleAvatar(
-                    backgroundColor: Colors.white,
-                    child: Icon(Icons.more_vert),
-                  ),
-                ),
+                // Positioned(
+                //   top: 40,
+                //   right: 10,
+                //   child: CircleAvatar(
+                //     backgroundColor: Colors.white,
+                //     child: Icon(Icons.favorite),
+                //   ),
+                // ),
               ],
             ),
 
-            const SizedBox(height: 10),
-
-            _card(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    userData.fullName ?? '',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 5),
-                  Text(
-                    // "175cm / 5ft 8in • Hindu • Chartered Accountant",
-                    "religion:${userData.religion ?? ""},Job: ${userData.job ?? ""},Height:${userData.height ?? ""},${userData.weight ?? ""},${userData.height ?? ""},",
-                    style: TextStyle(color: Colors.grey[700]),
-                  ),
-                ],
+ Container(
+                height: 110,
+                width: double.infinity,
+                padding: const EdgeInsets.only(
+                  // right: 220,
+                  left: 10,
+                  top: 10,
+                  bottom: 10,
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+              
+                  border: Border.all(color: Color(0xFFE0E0E0)),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      userData.fullName ?? '',
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      // "175cm / 5ft 8in • Hindu • Chartered Accountant",
+                      "Religion:${userData.religion ?? ""}",
+                      style: TextStyle(fontWeight: FontWeight.w500),
+                    ),
+                    const SizedBox(height: 7),
+                    Text(
+                      // "175cm / 5ft 8in • Hindu • Chartered Accountant",
+                      'Location: ${userData.residentState ?? ""},${userData.residentCity ?? ""}',
+                      style: TextStyle(fontWeight: FontWeight.w500),
+                    ),
+                  ],
+                ),
               ),
-            ),
+          
 
-            _sectionTitle("About you"),
-            _card(
+            sectionTitle("About"),
+            card(
               child: Text(
-                "Calm, ambitious and family oriented. Enjoys travelling, music and meaningful conversations.",
+                userData.bio ?? "",
               ),
             ),
 
-            _sectionTitle("Contact Details"),
-            _card(
+            sectionTitle("Contact Details"),
+            card(
               child: Column(
                 children: [
-                  _tile(Icons.phone, "Mobile", "+91 9999999999"),
-                  _tile(Icons.email, "Email", "demo@gmail.com"),
+                  detailText(Icons.phone, "Mobile", "+91 9999999999"),
+                  detailText(Icons.email, "Email", "demo@gmail.com"),
                 ],
               ),
             ),
 
-            _sectionTitle("Basic Details"),
-            _card(
+            sectionTitle("Basic Details"),
+            card(
               child: Column(
                 children: [
-                  _tile(Icons.cake, "Date of Birth", "01/01/1998"),
-                  _tile(Icons.person, "Gender", "Male"),
-                  _tile(Icons.favorite, "Marital Status", "Never Married"),
-                  _tile(Icons.location_on, "Location", "Kerala, India"),
-                  _tile(Icons.menu_book, "Religion", "Hindu"),
-                  _tile(Icons.height, "Height", "175 cm"),
-                  _tile(Icons.work, "Job", "Accountant"),
-                  _tile(Icons.school, "Education", "CA"),
+                  detailText(Icons.cake, "Date of Birth", " ${userData.dateBirth ?? ""}"),
+                  detailText(Icons.person, "Gender", "Male"),
+                  detailText(Icons.favorite, "Marital Status", userData.maritalStatus ?? ""),
+                  detailText(Icons.location_on, "Location",'${userData.residentCountry ?? ""},${userData.residentState ?? ""}'),
+                  detailText(Icons.menu_book, "Religion", userData.dateBirth ?? ""),
+                  detailText(Icons.height, "Height", userData.height ?? ""),
+                  detailText(Icons.work, "Job", userData.job ?? ""),
+                  detailText(Icons.school, "Education", userData.education ?? ""),
                 ],
               ),
             ),
 
-            _sectionTitle("Hobbies & Interests"),
-            _card(
+            sectionTitle("Hobbies & Interests"),
+            card(
               child: Column(
                 children: [
-                  _tile(Icons.brush, "Creative", "Drawing"),
-                  _tile(Icons.sports_soccer, "Fitness", "Gym"),
-                  _tile(Icons.movie, "Fun", "Movies"),
+                  detailText(Icons.brush, "Creative", userData.creativeHobbies ?? ""),
+                  detailText(Icons.sports_soccer, "Fitness", userData.fitnessHobbies ?? ""),
+                  detailText(Icons.movie, "Fun", userData.funHobbies ?? ""),
+                   detailText(Icons.movie, "Hobbies", userData.otherInterests ?? ""),
                 ],
               ),
             ),
 
-            _sectionTitle("Family Details"),
-            _card(
+            sectionTitle("Family Details"),
+            card(
               child: Column(
                 children: [
-                  _tile(Icons.person, "Father", "Business"),
-                  _tile(Icons.person, "Mother", "Housewife"),
-                  _tile(Icons.group, "Sisters", "1"),
-                  _tile(Icons.group, "Brothers", "1"),
+                   detailText(Icons.person, "Father",  userData.fatherOccupation ?? ""),
+                  detailText(Icons.person, "Mother",  userData.motherOccupation ?? ""),
+                  detailText(Icons.group, "Sisters", userData.sisters ?? ""),
+                  detailText(Icons.group, "Brothers",  userData.brothers ?? ""),
                 ],
               ),
             ),
 
-            const SizedBox(height: 20),
+            height20,
 
             Padding(
               padding: const EdgeInsets.all(16.0),
@@ -136,12 +159,10 @@ class UserDetailsScreen extends StatelessWidget {
                   minimumSize: const Size(double.infinity, 50),
                 ),
                 onPressed: () {
-
                   // Get.to(PaymentScreen());
-controller1.openCheckout();
-
+                  controller.openCheckout();
                 },
-                child: const Text("Continue"),
+                child: Text("Continue", style: TextStyle(color: white)),
               ),
             ),
           ],
@@ -150,46 +171,9 @@ controller1.openCheckout();
     );
   }
 
-  Widget _sectionTitle(String title) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: Align(
-        alignment: Alignment.centerLeft,
-        child: Text(
-          title,
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Color(0xFF8B1E2D),
-          ),
-        ),
-      ),
-    );
-  }
 
-  Widget _card({required Widget child}) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Color(0xFFE0E0E0)),
-      ),
-      child: child,
-    );
-  }
 
-  Widget _tile(IconData icon, String title, String value) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 6),
-      child: Row(
-        children: [
-          Icon(icon, size: 18, color: Color(0xFF8B1E2D)),
-          const SizedBox(width: 10),
-          Expanded(child: Text(title)),
-          Text(value, style: const TextStyle(fontWeight: FontWeight.w500)),
-        ],
-      ),
-    );
-  }
+ 
+
+ 
 }
